@@ -1,10 +1,15 @@
 import React from 'react'
+import { Route, Routes } from 'react-router-dom'
+
+import Home from './container/Home.tsx'
+import Login from './components/Login.tsx'
 
 const App = () => {
   return (
-    <div className="text-3xl font-bold underline">
-      Hello world.
-    </div>
+    <Routes>
+      <Route path="login" element={<Login />}/>
+      <Route path="/*" element={<Home />}/>
+    </Routes>
   )
 }
 
