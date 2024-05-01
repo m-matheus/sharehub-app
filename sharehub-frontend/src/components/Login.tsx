@@ -1,23 +1,38 @@
-import React from 'react';
 import GoogleLogin from 'react-google-login';
 import { FcGoogle } from 'react-icons/fc';
+
+import { client } from '../client';
+import { useNavigate } from 'react-router-dom';
 
 
 const logo = require('../assets/logowhite.png');
 const video = require('../assets/sharehub.mp4');
 
-
 const Login = () => {
+    const navigate = useNavigate();
 
     const responseGoogle = (response: any) => {
-        console.log(response);
+        localStorage.setItem('user', JSON.stringify(response.profileObj));
+
+        const { name, googleId, imageUrl } = response.profileObj;
+
+        const doc = {
+            _id: googleId,
+            _type: 'user',
+            userName: name,
+            image: imageUrl
+        }
+
+        client.createIfNotExists(doc).then(() => {
+            navigate('/', { replace: true });
+        })
     }
 
     return (
         <div className='flex justify-start items-center flex-col h-screen'>
             <div className='relative w-full h-full'>
                 <video 
-                    src={video}
+                    src={ video }
                     typeof='video/mp4'
                     loop
                     controls={false}
