@@ -3,8 +3,8 @@ import GoogleLogin from 'react-google-login';
 import { FcGoogle } from 'react-icons/fc';
 
 
-import logo from '../assets/logowhite.png';
-import sharehubVideo from '../assets/sharehub.mp4';
+const logo = require('../assets/logowhite.png');
+const video = require('../assets/sharehub.mp4');
 
 
 const Login = () => {
@@ -17,7 +17,7 @@ const Login = () => {
         <div className='flex justify-start items-center flex-col h-screen'>
             <div className='relative w-full h-full'>
                 <video 
-                    src={sharehubVideo}
+                    src={video}
                     typeof='video/mp4'
                     loop
                     controls={false}
@@ -33,7 +33,7 @@ const Login = () => {
 
                     <div className='shadow-2x1'>   
                         <GoogleLogin 
-                            clientId=''
+                            clientId={process.env.REACT_APP_GOOGLE_API_TOKEN || ''}
                             render={(renderProps) => (
                                 <button 
                                     type='button'
