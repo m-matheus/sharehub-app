@@ -21,12 +21,13 @@ const Home = () => {
 
 
   useEffect(() => {
-    const query = userQuery(userInfo?.googleId);
+    const query = userQuery(userInfo?._id);
+    
     client.fetch(query).then((data) => {
       setUser(data[0]);
     })
-  }, []);
-
+  }, [userInfo?._id]);
+  
   return (
     <div className="flex bg-gray-50 md:flex-row flex-col h-screen transaction-height duration-75 ease-out">
       <div className="hidden md:flex h-screen flex-initial">
