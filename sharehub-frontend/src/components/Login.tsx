@@ -24,6 +24,8 @@ const Login = () => {
             image: picture
         }
 
+        localStorage.setItem('user', JSON.stringify(user));
+
         await client.createIfNotExists(user).then(() => {
             navigate('/');
         });
